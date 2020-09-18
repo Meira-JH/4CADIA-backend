@@ -1,0 +1,174 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "4CADIA Swagger",
+        "description": "This was created as part of the 4CADIA Factory developer's selection.",
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "externalDocs": {
+        "description": "Find out more about 4CADDIA",
+        "url": "https://4cadia.com/"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3030/"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Banking",
+            "description": "Some simple banking operations for an Open Banking blockchain system simulation"
+        },
+        {
+            "name": "User",
+            "description": "User operations"
+        }
+    ],
+    "paths": {
+        "/user/signup": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Creates new user",
+                "operationId": "createUser",
+                "requestBody": {
+                    "description": "The user object necessary for the operation",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "400": {
+                        "description": "Bad request",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/user/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Logs user in",
+                "operationId": "loginUser",
+                "requestBody": {
+                    "description": "The user object necessary for the operation",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginEntry"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "400": {
+                        "description": "Bad request",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/banking/createAccount": {
+            "post": {
+                "tags": [
+                    "Banking"
+                ],
+                "summary": "Creates a new account",
+                "operationId": "createAccount",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad request",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/banking/getAccount": {
+            "get": {
+                "tags": [
+                    "Banking"
+                ],
+                "summary": "Gets account information",
+                "operationId": "getAccount",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad request",
+                        "content": {}
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "User": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "cpf": {
+                        "type": "integer"
+                    },
+                    "birthdate": {
+                        "type": "string"
+                    },
+                    "device": {
+                        "type": "string"
+                    },
+                    "role": {
+                        "type": "string"
+                    }
+                }
+            },
+            "LoginEntry": {
+                "type": "object",
+                "properties": {
+                    "cpf": {
+                        "type": "integer"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "device": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

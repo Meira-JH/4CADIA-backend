@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es2017" ,
+    "module": "commonjs" ,
+    "lib": [
+      "es2019",
+      "es6"
+    ] ,
+    "allowJs": true,                       
+    "outDir": "./build" ,
+    "removeComments": true,                
+
+    "strict": true ,
+
+    "esModuleInterop": true ,
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,        
+    "emitDecoratorMetadata": true,         
+
+    "forceConsistentCasingInFileNames": true ,
+    "baseUrl": ".",
+    "paths": {
+      "@controller/*": ["./src/controller/*"],
+      "@business/*": ["./src/business/*"]
+    }
+  }
+}

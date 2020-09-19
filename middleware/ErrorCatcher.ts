@@ -15,6 +15,6 @@ export default function errorCatcher (
         console.log(error)
         return response
                 .status(400)
-                .send({ message: "Ops! Aconteceu algo inesperado." })
+                .send({ message: "Bad request." })
     }
 }

@@ -108,18 +108,120 @@
                 }
             }
         },
-        "/banking/getAccount": {
+        "/banking/addBalance/": {
+            "post": {
+                "tags": [
+                    "Banking"
+                ],
+                "summary": "Creates a new account",
+                "description": "The account will be created based on the Access Token provided by both Login and Refresh Token endingpoints.",
+                "operationId": "createAccount",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The object necessary for the operation",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BankTransaction"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "400": {
+                        "description": "Bad request",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/banking/getAccounts": {
             "get": {
                 "tags": [
                     "Banking"
                 ],
-                "summary": "Gets account information",
+                "summary": "Gets all accounts of a giving user",
                 "description": "This endingpoint returns the account information provided by the User ID retrieved by its Access Token.",
                 "operationId": "getAccount",
                 "parameters": [
                     {
                         "name": "token",
                         "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad request",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/banking/getBalance/{accountId}": {
+            "get": {
+                "tags": [
+                    "Banking"
+                ],
+                "summary": "Gets account balance",
+                "description": "This endingpoint returns the balance of a giving account, once permissions are verified through access token.",
+                "operationId": "getBalance",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad request",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/banking/getStatement/{accountId}": {
+            "get": {
+                "tags": [
+                    "Banking"
+                ],
+                "summary": "Gets account statement",
+                "description": "This endingpoint returns the overrall transactions and balance of a giving account, once permissions are verified through access token.",
+                "operationId": "getStatement",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "required": true,
                         "schema": {
                             "type": "string"
                         }
@@ -146,7 +248,7 @@
                         "type": "string"
                     },
                     "cpf": {
-                        "type": "integer"
+                        "type": "string"
                     },
                     "birthdate": {
                         "type": "string"
@@ -155,6 +257,26 @@
                         "type": "string"
                     },
                     "role": {
+                        "type": "string"
+                    }
+                }
+            },
+            "BankTransaction": {
+                "type": "object",
+                "properties": {
+                    "user_id": {
+                        "type": "string"
+                    },
+                    "account_id": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "integer"
+                    },
+                    "date": {
+                        "type": "string"
+                    },
+                    "description": {
                         "type": "string"
                     }
                 }

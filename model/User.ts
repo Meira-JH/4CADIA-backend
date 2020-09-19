@@ -2,7 +2,7 @@ export interface User {
     id: string,
     name: string,
     password: string,
-    cpf: number,
+    cpf: string,
     birthdate: string,
     device: string,
     role: string

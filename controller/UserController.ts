@@ -82,12 +82,14 @@ export class UserController {
       user.id,
       device
     );
+    console.log("refresh get by id device", retrievedTokenFromDatabase)
 
     if (retrievedTokenFromDatabase) {
       await refreshTokenDatabase.deleteRefreshToken(
         retrievedTokenFromDatabase.token
       );
     }
+    console.log('saiu do delete')
 
     const refreshTokenToStore: RefreshTokenDTO = {
       token: refreshToken,
@@ -98,6 +100,7 @@ export class UserController {
 
     await refreshTokenDatabase.storeRefreshToken(refreshTokenToStore);
 
+    console.log("fim do login refresh", refreshTokenToStore)
     response.status(200).send({
       accessToken,
       refreshToken,

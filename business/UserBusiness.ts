@@ -17,7 +17,7 @@ export class UserBusiness {
     await this.userDataBase.signup(user);
   }
 
-  public async login(cpf: number, password: string) {
+  public async login(cpf: string, password: string) {
     console.log("userbusiness login cpf", cpf);
     const user = await this.userDataBase.getUserByCpf(cpf);
 
@@ -28,7 +28,7 @@ export class UserBusiness {
     const hashCompare = await this.hashManager.compare(password, user.password);
 
     if (!hashCompare) {
-      throw new CustomError("Invalid password", 400);
+      throw new CustomError("Senha inválida", 400);
     }
 
     return { id: user.id, role: user.role };

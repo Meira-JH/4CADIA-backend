@@ -77,7 +77,7 @@ export class BankingController {
 
     console.log(statement)
     response.status(200).send({
-      extrato: statement,
+      statement,
     });
   }
 

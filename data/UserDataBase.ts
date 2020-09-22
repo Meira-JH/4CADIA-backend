@@ -13,13 +13,12 @@ export class UserDatabase extends ServerDataBase {
                 '${user.password}',
                 '${user.cpf}',
                 '${user.birthdate}',
-                '${user.device}',
                 '${user.role}'
             );
         `);
   }
 
-  public async getUserByCpf(cpf: number): Promise<any> {
+  public async getUserByCpf(cpf: string): Promise<any> {
     console.log("userdata cpf", cpf);
     const resultDatabase = await this.getConnection()
       .select("*")

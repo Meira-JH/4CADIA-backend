@@ -21,7 +21,7 @@
     "tags": [
         {
             "name": "Banking",
-            "description": "Some simple banking operations for an Open Banking blockchain system simulation"
+            "description": "Some simple banking operations for an Open Banking system simulation"
         },
         {
             "name": "User",
@@ -285,7 +285,7 @@
                 "type": "object",
                 "properties": {
                     "cpf": {
-                        "type": "integer"
+                        "type": "string"
                     },
                     "password": {
                         "type": "string"

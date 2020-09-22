@@ -4,7 +4,7 @@ import { ServerDataBase } from "./ServerDataBase";
 export class RefreshTokenDataBase extends ServerDataBase {
   private static TABLE_NAME = "refresh_token";
 
-  public async storeRefreshToken(reFreshToken : RefreshTokenDTO): Promise<void> {
+  public async storeRefreshToken(reFreshToken: RefreshTokenDTO): Promise<void> {
     await this.getConnection().raw(`
         INSERT INTO ${RefreshTokenDataBase.TABLE_NAME}
           VALUES(
@@ -17,8 +17,6 @@ export class RefreshTokenDataBase extends ServerDataBase {
   }
 
   public async getRefreshToken(token: string): Promise<any> {
-    console.log("refreshtoken", token);
-
     const tokenInfo = await this.getConnection()
       .select("*")
       .from(RefreshTokenDataBase.TABLE_NAME)
@@ -39,6 +37,8 @@ export class RefreshTokenDataBase extends ServerDataBase {
     id: string,
     device: string
   ): Promise<any> {
+    console.log("refreshtoken", id, device);
+
     const result = await this.getConnection()
       .select("*")
       .from(RefreshTokenDataBase.TABLE_NAME)
@@ -47,11 +47,12 @@ export class RefreshTokenDataBase extends ServerDataBase {
         device,
       });
 
-    const retrievedToken = result[0][0];
-
-    if (retrievedToken === undefined) {
+    if (result[0] === undefined) {
       return undefined;
     }
+
+    console.log("resultado refresh", result[0]);
+    const retrievedToken = result[0];
 
     return {
       token: retrievedToken.refresh_token,
@@ -62,9 +63,10 @@ export class RefreshTokenDataBase extends ServerDataBase {
   }
 
   public async deleteRefreshToken(token: string): Promise<void> {
-    await this.getConnection().raw(`
-      DELETE FROM ${RefreshTokenDataBase.TABLE_NAME}
-      WHERE refresh_token = "${token}" 
-    `);
+    console.log("no delete refresh", token);
+    await this.getConnection()
+      .from(RefreshTokenDataBase.TABLE_NAME)
+      .del()
+      .where('refresh_token', token);
   }
 }
